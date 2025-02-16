@@ -1,14 +1,16 @@
-FROM debian:bullseye
+FROM debian:buster
 
-RUN apt-get update && apt-get install -y nginx && apt-get install -y openssl
+RUN apt-get update && apt-get install -y nginx openssl
 
-COPY  conf/nginx.conf /etc/nginx/
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/nginx.key \
+    -out /etc/ssl/certs/nginx.crt \
+    -subj "/C=XX/ST=State/L=City/O=Organization/CN=achakkaf.42.fr"
 
-# RUN touch /etc/nginx/ssl/nginx.key /etc/nginx/ssl/nginx.crt
+COPY ./conf/default.conf    /etc/nginx/sites-available/achakkaf.42.fr.conf
 
+RUN ln -s /etc/nginx/sites-available/achakkaf.42.fr.conf /etc/nginx/sites-enabled/achakkaf.42.fr.conf
 
-RUN mkdir -p /etc/nginx/ssl
+CMD ["nginx", "-g", "daemon off;"]
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt -subj "/C=MO/L=TE/O=1337/OU=student/CN=achakkaf.42.ma"
-
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+#done need debugs

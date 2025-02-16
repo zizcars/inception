@@ -1,14 +1,11 @@
-FROM debian:bullseye
+FROM debian:buster
 
-RUN apt-get update -y && apt-get install mariadb-server -y
+RUN apt-get update && apt-get install -y mariadb-server
 
-COPY tools/mariadb.sh /
 
-RUN sed -i "s/127.0.0.1/0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY tools/db_setup.sh /usr/local/bin/
 
-ENV MYSQL_ROOT_PASSWORD=root_password
-ENV MYSQL_DATABASE=wp_database
-ENV MYSQL_USER=wp_user
-ENV MYSQL_PASSWORD=wp_password
+RUN chmod +x /usr/local/bin/db_setup.sh
 
-CMD bash /mariadb.sh
+CMD ["/usr/local/bin/db_setup.sh"]
+
