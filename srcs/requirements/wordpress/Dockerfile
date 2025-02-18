@@ -14,5 +14,3 @@ COPY conf/www.conf /etc/php/7.4/fpm/pool.d/
 COPY --chmod=0755 tools/wordpress_setup.sh /usr/local/bin/
 
 ENTRYPOINT [ "/usr/local/bin/wordpress_setup.sh" ]
-
-#done need debuging

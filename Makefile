@@ -5,15 +5,17 @@ ENV_FILE=srcs/.env
 all: build
 
 build:
-	mkdir -p /home/achakkaf/mount/website
-	mkdir -p /home/achakkaf/mount/database
+	mkdir -p /home/achakkaf/data/website
+	mkdir -p /home/achakkaf/data/database
 	docker-compose -f $(DOCKER_COMPOSE) --env-file $(ENV_FILE) up -d --build 
 
 logs: 
 	docker-compose -f $(DOCKER_COMPOSE) logs
 
-clean: 
+down:
 	docker-compose -f $(DOCKER_COMPOSE) down --volumes
-	sudo rm -rf /home/achakkaf/mount/*
 
-re : clean build
+remove_volumes : down
+	sudo rm -rf /home/achakkaf/data/*
+
+re : remove_volumes build

@@ -15,13 +15,11 @@
 	sed -i 's/= 127.0.0.1/= 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 	sed -i 's/basedir/port\t\t\t\t\t= 3306\nbasedir/' /etc/mysql/mariadb.conf.d/50-server.cnf
 	echo "Inception : 50-server.cnf updated."
-	# cat /etc/mysql/mariadb.conf.d/50-server.cnf
 	if [ ! -d "/var/lib/mysql/${DB_DATABASE}" ];
 	then
 		echo "Inception : ${DB_DATABASE} database is being created."
 		mysqld_safe &
 		sleep 2
-		# service mariadb start
 		mysql -e "CREATE DATABASE IF NOT EXISTS ${DB_DATABASE};"
 		mysql -e "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}';"
 		mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PASSWORD}';"
@@ -34,6 +32,5 @@
 	fi
 # fi
 
-# Start the mariadb service in safe mode
 exec "mysqld_safe"
 

@@ -8,8 +8,6 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - main-network
-    # ports:
-    #   - '3306:3306'
     env_file:
       - .env
     restart: always
@@ -24,8 +22,6 @@ services:
       - main-network
     depends_on:
       - mariadb
-    # ports:
-    #   - '9000:9000'
     restart: always
     env_file:
       - .env
@@ -52,12 +48,12 @@ volumes:
   wordpress-data:
     driver: local
     driver_opts:
-      device: /home/achakkaf/mount/website
+      device: /home/achakkaf/data/website
       o: bind
       type: none
   db-data:
     driver: local
     driver_opts:
-      device: /home/achakkaf/mount/database
+      device: /home/achakkaf/data/database
       o: bind
       type: none
