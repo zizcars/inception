@@ -8,8 +8,8 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - main-network
-    ports:
-      - '3306:3306'
+    # ports:
+    #   - '3306:3306'
     env_file:
       - .env
     restart: always
@@ -24,8 +24,8 @@ services:
       - main-network
     depends_on:
       - mariadb
-    ports:
-      - '9000:9000'
+    # ports:
+    #   - '9000:9000'
     restart: always
     env_file:
       - .env
@@ -46,7 +46,6 @@ services:
 
 networks:
   main-network:
-    name: main-network
     driver: bridge
 
 volumes:

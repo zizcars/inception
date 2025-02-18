@@ -14,5 +14,6 @@ logs:
 
 clean: 
 	docker-compose -f $(DOCKER_COMPOSE) down --volumes
+	sudo rm -rf /home/achakkaf/mount/*
 
 re : clean build
