@@ -24,13 +24,13 @@ services:
       - main-network
     depends_on:
       - mariadb
+      - redis
     restart: always
     env_file:
       - .env
 
   nginx:
-    build:
-      context: ./requirements/nginx
+    build: ./requirements/nginx
     image: nginx
     container_name: nginx
     ports:
@@ -41,6 +41,16 @@ services:
       - main-network
     depends_on:
       - wordpress
+    restart: always
+  
+  redis:
+    build: ./requirements/bonus/redis
+    image: redis
+    container_name: redis
+    volumes:
+      - redis-data:/data
+    networks:
+      - main-network
     restart: always
 
 networks:
@@ -58,5 +68,11 @@ volumes:
     driver: local
     driver_opts:
       device: /home/achakkaf/data/database
+      o: bind
+      type: none
+  redis-data:
+    driver: local
+    driver_opts:
+      device: /home/achakkaf/data/redis
       o: bind
       type: none

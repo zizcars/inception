@@ -12,6 +12,8 @@ COPY ./conf/default.conf    /etc/nginx/sites-available/achakkaf.42.fr.conf
 
 RUN ln -s /etc/nginx/sites-available/achakkaf.42.fr.conf /etc/nginx/sites-enabled/achakkaf.42.fr.conf
 
+EXPOSE 443
+
 CMD ["nginx", "-g", "daemon off;"]
 
 #done need debugs

@@ -29,9 +29,9 @@ else
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL
 
-    wp theme install Variations --allow-root
-    wp theme active Variations --allow-root
-    wp theme list --status=all --allow-root
+    wp plugin install --allow-root redis-cache 
+    wp plugin activate --allow-root redis-cache
+    
 fi
 
 php-fpm7.4 -F
