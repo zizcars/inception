@@ -3,6 +3,7 @@ services:
   mariadb:
     build: 
       context: ./requirements/mariadb
+    image: mariadb
     container_name: mariadb
     volumes:
       - db-data:/var/lib/mysql
@@ -15,6 +16,7 @@ services:
   wordpress:
     build:
       context: ./requirements/wordpress
+    image: wordpress
     container_name: wordpress
     volumes:
       - wordpress-data:/var/www/html
@@ -29,6 +31,7 @@ services:
   nginx:
     build:
       context: ./requirements/nginx
+    image: nginx
     container_name: nginx
     ports:
       - "443:443"

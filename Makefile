@@ -18,4 +18,4 @@ down:
 remove_volumes : down
 	sudo rm -rf /home/achakkaf/data/*
 
-re : remove_volumes build
+re : down build
