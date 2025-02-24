@@ -29,9 +29,14 @@ else
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL
 
-    wp plugin install --allow-root redis-cache 
-    wp plugin activate --allow-root redis-cache
-    
+#   --------- Bonus redis-cache ---------
+    wp plugin install --allow-root redis-cache --activate
+
+    echo "
+define('WP_CACHE', true);
+define('WP_REDIS_HOST', '127.0.0.1');
+define('WP_REDIS_PORT', 6379);" >> /var/www/html/wordpress/wp-config.php
+
 fi
 
 php-fpm7.4 -F

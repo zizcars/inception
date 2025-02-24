@@ -1,6 +1,7 @@
 
 DOCKER_COMPOSE=srcs/docker-compose.yml
 ENV_FILE=srcs/.env
+IMAGES = $(shell docker images -a -q)
 
 all: build
 
@@ -19,6 +20,6 @@ down:
 
 clean : down
 	sudo rm -rf /home/achakkaf/data/*
-	docker rmi -f $(docker images -a -q)
+	docker rmi -f $(IMAGES)
 
 re : down build
