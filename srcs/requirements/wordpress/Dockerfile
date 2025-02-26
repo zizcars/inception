@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y curl php php-fpm php-mysql mariadb-clie
     wp cli update && \
     rm -rf /var/lib/apt/lists/* 
 
+
+RUN apt-get update && apt-get install iputils-ping -y
 RUN mkdir -p /run/php
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/

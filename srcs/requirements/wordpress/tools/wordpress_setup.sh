@@ -22,20 +22,27 @@ else
     echo "Installing Wordpress"
 
     wp core install --allow-root \
-        --path="." \
         --url=$DOMAIN_NAME \
         --title=$WP_TITLE \
         --admin_user=$WP_ADMIN \
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL
 
-#   --------- Bonus redis-cache ---------
-    wp plugin install --allow-root redis-cache --activate
+    wp user create --allow-root user1 user1@gmail.com --role=subscriber
 
-    echo "
-define('WP_CACHE', true);
-define('WP_REDIS_HOST', '127.0.0.1');
-define('WP_REDIS_PORT', 6379);" >> /var/www/html/wordpress/wp-config.php
+    chown -R www-data:www-data /var/www/html/wordpress
+
+#   --------- Bonus redis-cache ---------
+
+    wp config  set WP_REDIS_HOST redis --allow-root
+
+    wp config set WP_REDIS_PORT 6379 --allow-root
+
+    wp config set WP_CACHE 'true' --allow-root
+
+    wp plugin install redis-cache --allow-root --activate
+
+    wp redis enable --allow-root
 
 fi
 
