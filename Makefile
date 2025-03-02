@@ -6,7 +6,6 @@ IMAGES = $(shell docker images -a -q)
 all: build
 
 build:
-
 	mkdir -p /home/achakkaf/data/database  
 	mkdir -p /home/achakkaf/data/website
 	mkdir -p /home/achakkaf/data/redis

@@ -8,8 +8,10 @@ RUN chmod 755 /var/run/vsftpd/empty
 
 COPY /conf/vsftpd.conf /etc/vsftpd.conf
 
-RUN useradd -md /var/www/html ftpuser && echo "ftpuser:ftpuser" | chpasswd 
+COPY /tools/entrypoint.sh /usr/local/bin/
 
-RUN chown -R ftpuser:ftpuser /var/www/html
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-CMD ["/usr/sbin/vsftpd"]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+
+# CMD ["/usr/sbin/vsftpd"]
