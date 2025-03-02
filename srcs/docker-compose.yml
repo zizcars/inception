@@ -25,6 +25,7 @@ services:
     depends_on:
       - mariadb
       - redis
+      - vsftpd
     restart: always
     env_file:
       - .env
@@ -52,6 +53,16 @@ services:
     networks:
       - main-network
     restart: always
+  
+  vsftpd:
+    build: ./requirements/bonus/FTP
+    image: vsftpd
+    container_name: vsftpd
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - main-network
+    restart: always
 
 networks:
   main-network:
@@ -59,18 +70,21 @@ networks:
 
 volumes:
   wordpress-data:
+    name: wordpress-data
     driver: local
     driver_opts:
       device: /home/achakkaf/data/website
       o: bind
       type: none
   db-data:
+    name: db-data
     driver: local
     driver_opts:
       device: /home/achakkaf/data/database
       o: bind
       type: none
   redis-data:
+    name: redis-data
     driver: local
     driver_opts:
       device: /home/achakkaf/data/redis
