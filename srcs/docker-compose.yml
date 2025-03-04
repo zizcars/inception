@@ -83,6 +83,14 @@ services:
       - "3000:3000"
     restart: always
 
+  website:
+    build: ./requirements/bonus/website
+    image: website
+    container_name: website
+    ports:
+      - "80:80"
+    restart: always
+
 networks:
   main-network:
     driver: bridge
