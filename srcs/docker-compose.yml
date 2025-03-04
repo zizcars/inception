@@ -24,8 +24,6 @@ services:
       - main-network
     depends_on:
       - mariadb
-      - redis
-      - vsftpd
     restart: always
     env_file:
       - .env
@@ -64,6 +62,26 @@ services:
       - main-network
     restart: always
     env_file: ./.env
+
+  adminer:
+    build: ./requirements/bonus/adminer
+    image: adminer
+    container_name: adminer
+    networks:
+      - main-network
+    ports:
+      - "8080:8080"
+    restart: always
+
+  grafana:
+    build: ./requirements/bonus/grafana
+    image: grafana
+    container_name: grafana
+    networks:
+      - main-network
+    ports:
+      - "3000:3000"
+    restart: always
 
 networks:
   main-network:
