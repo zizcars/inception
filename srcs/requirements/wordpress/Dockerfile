@@ -14,7 +14,9 @@ RUN mkdir -p /run/php
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/
 
-COPY --chmod=0755 tools/wordpress_setup.sh /usr/local/bin/
+COPY tools/wordpress_setup.sh /usr/local/bin/
+
+RUN chmod 755 /usr/local/bin/wordpress_setup.sh
 
 # EXPOSE 9000:9000
 

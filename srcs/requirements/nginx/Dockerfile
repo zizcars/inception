@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y nginx openssl && \
     rm -rf /var/lib/apt/lists/*
@@ -15,5 +15,3 @@ RUN ln -s /etc/nginx/sites-available/achakkaf.42.fr.conf /etc/nginx/sites-enable
 EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
-
-#done need debugs

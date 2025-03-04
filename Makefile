@@ -6,9 +6,9 @@ IMAGES = $(shell docker images -a -q)
 all: build
 
 build:
-	mkdir -p /home/achakkaf/data/database  
-	mkdir -p /home/achakkaf/data/website
-	mkdir -p /home/achakkaf/data/redis
+	mkdir -p /home/$(USER)/data/database  
+	mkdir -p /home/$(USER)/data/website
+	mkdir -p /home/$(USER)/data/redis
 	docker-compose -f $(DOCKER_COMPOSE) --env-file $(ENV_FILE) up -d --build 
 
 logs: 
@@ -18,7 +18,7 @@ down:
 	docker-compose -f $(DOCKER_COMPOSE) down --volumes
 
 clean : down
-	sudo rm -rf /home/achakkaf/data/*
+	sudo rm -rf /home/$(USER)/data/*
 	docker rmi -f $(IMAGES)
 
 re : down build

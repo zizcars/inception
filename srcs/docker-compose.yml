@@ -100,20 +100,20 @@ volumes:
     name: wordpress-data
     driver: local
     driver_opts:
-      device: /home/achakkaf/data/website
+      device: /home/kali/data/website
       o: bind
       type: none
   db-data:
     name: db-data
     driver: local
     driver_opts:
-      device: /home/achakkaf/data/database
+      device: /home/kali/data/database
       o: bind
       type: none
   redis-data:
     name: redis-data
     driver: local
     driver_opts:
-      device: /home/achakkaf/data/redis
+      device: /home/kali/data/redis
       o: bind
       type: none
