@@ -1,33 +1,5 @@
 
 services:
-  mariadb:
-    build: 
-      context: ./requirements/mariadb
-    image: mariadb
-    container_name: mariadb
-    volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - main-network
-    env_file:
-      - .env
-    restart: always
-
-  wordpress:
-    build:
-      context: ./requirements/wordpress
-    image: wordpress
-    container_name: wordpress
-    volumes:
-      - wordpress-data:/var/www/html
-    networks:
-      - main-network
-    depends_on:
-      - mariadb
-    restart: always
-    env_file:
-      - .env
-
   nginx:
     build: ./requirements/nginx
     image: nginx
@@ -41,7 +13,33 @@ services:
     depends_on:
       - wordpress
     restart: always
-  
+
+  wordpress:
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - main-network
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    restart: always
+
+  mariadb:
+    build: ./requirements/mariadb
+    image: mariadb
+    container_name: mariadb
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - main-network
+    env_file:
+      - .env
+    restart: always
+
   redis:
     build: ./requirements/bonus/redis
     image: redis
@@ -60,8 +58,9 @@ services:
       - wordpress-data:/var/www/html
     networks:
       - main-network
+    env_file: 
+      - .env
     restart: always
-    env_file: ./.env
 
   adminer:
     build: ./requirements/bonus/adminer
@@ -103,6 +102,7 @@ volumes:
       device: /home/kali/data/website
       o: bind
       type: none
+
   db-data:
     name: db-data
     driver: local
@@ -110,6 +110,7 @@ volumes:
       device: /home/kali/data/database
       o: bind
       type: none
+
   redis-data:
     name: redis-data
     driver: local
