@@ -97,7 +97,7 @@ volumes:
     name: wordpress-data
     driver: local
     driver_opts:
-      device: /home/kali/data/wordpress
+      device: /home/achakkaf/data/wordpress
       o: bind
       type: none
 
@@ -105,6 +105,6 @@ volumes:
     name: db-data
     driver: local
     driver_opts:
-      device: /home/kali/data/database
+      device: /home/achakkaf/data/database
       o: bind
       type: none

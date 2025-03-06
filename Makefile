@@ -16,7 +16,7 @@ down:
 	docker-compose -f $(DOCKER_COMPOSE) down
 
 clean : down
-	docker system prune -f --all
+	docker system prune -f --all 
 
 fclean: clean 
 	sudo rm -rf /home/$(USER)/data
