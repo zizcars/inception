@@ -8,7 +8,7 @@ all: build
 
 build:
 	mkdir -p /home/$(USER)/data/database
-	mkdir -p /home/$(USER)/data/website
+	mkdir -p /home/$(USER)/data/wordpress
 	mkdir -p /home/$(USER)/data/redis
 	docker-compose -f $(DOCKER_COMPOSE) --env-file $(ENV_FILE) up -d --build
 
@@ -22,7 +22,7 @@ clean : down
 	docker rm -f $(PS)
 	docker rmi -f $(IMAGES)
 
-fclean: clean
-	sudo rm -rf /home/$(USER)/data/*
+fclean: down 
+	sudo rm -rf /home/$(USER)/data
 
 re : down build
