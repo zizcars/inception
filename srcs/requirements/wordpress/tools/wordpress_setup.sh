@@ -28,9 +28,7 @@ else
         --admin_password=$WP_ADMIN_PASSWORD \
         --admin_email=$WP_ADMIN_EMAIL
 
-    wp user create --allow-root user1 user1@gmail.com --role=subscriber
-
-    chown -R www-data:www-data /var/www/html/wordpress
+    wp user create --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD --role=subscriber
 
 #   --------- Bonus redis-cache ---------
 
@@ -45,5 +43,7 @@ else
     wp redis enable --allow-root
 
 fi
+
+chown -R www-data:www-data /var/www/html/wordpress
 
 php-fpm7.4 -F

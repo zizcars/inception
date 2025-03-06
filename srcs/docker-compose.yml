@@ -44,8 +44,6 @@ services:
     build: ./requirements/bonus/redis
     image: redis
     container_name: redis
-    volumes:
-      - redis-data:/data
     networks:
       - main-network
     restart: always
@@ -108,13 +106,5 @@ volumes:
     driver: local
     driver_opts:
       device: /home/kali/data/database
-      o: bind
-      type: none
-
-  redis-data:
-    name: redis-data
-    driver: local
-    driver_opts:
-      device: /home/kali/data/redis
       o: bind
       type: none
